@@ -1,1 +1,60 @@
-#!/usr/bin/env nodevar fs = require('fs'),    sys = require('sys'),    Balancer = require('./lib/balancer').Balancer,    argv = process.argv.slice(2),    filename = './app.balancer';filename = argv[0] || filename;    function help() {  sys.puts('Help:');  sys.puts('node-balancer [config-file]');  sys.puts('By default [config-file] = ./app.balancer');  sys.puts('');  sys.puts('Config file must contain valid JSON object');  sys.puts('');  sys.puts('Example config:');  sys.puts('{');  sys.puts('  "servers" : [');  sys.puts('    "127.0.0.1:8080",');  sys.puts('    "127.0.0.1:8081"');  sys.puts('  ],');  sys.puts('  "addr" : "127.0.0.1:80",');  sys.puts('  "spread" : {,');  sys.puts('    "include": ".*",');  sys.puts('    "exclude": "\\\\.json$"');  sys.puts('  }');  sys.puts('}');  sys.puts('');  sys.puts('"servers" - servers list');  sys.puts('"addr" - balancer address');  sys.puts('"spread" - balancer can spread request to random server');  sys.puts('           use this option to configure rules of spread');  sys.puts('           "include", "exclude" - should contain RegExp');}if (filename === '-h' || filename === '--help') {  help();  return;}    fs.readFile(filename, function(err, data) {  if (err) {    help();    return;  }    var config;  try {    config = JSON.parse(data);  } catch (e) {    throw Error(filename + ' is not valid JSON file (' + e +')');  }    Balancer(config);});process.on('uncaughtException', function(e) {  sys.puts('Balancer caught exception: ' + e);});
+#!/usr/bin/env node
+var fs = require('fs'),
+    sys = require('sys'),
+    Balancer = require('./lib/balancer').Balancer,
+    argv = process.argv.slice(2),
+    filename = './app.balancer';
+
+filename = argv[0] || filename;
+    
+function help() {
+  sys.puts('Help:');
+  sys.puts('node-balancer [config-file]');
+  sys.puts('By default [config-file] = ./app.balancer');
+  sys.puts('');
+  sys.puts('Config file must contain valid JSON object');
+  sys.puts('');
+  sys.puts('Example config:');
+  sys.puts('{');
+  sys.puts('  "servers" : [');
+  sys.puts('    "127.0.0.1:8080",');
+  sys.puts('    "127.0.0.1:8081"');
+  sys.puts('  ],');
+  sys.puts('  "addr" : "127.0.0.1:80",');
+  sys.puts('  "spread" : {,');
+  sys.puts('    "include": ".*",');
+  sys.puts('    "exclude": "\\\\.json$"');
+  sys.puts('  }');
+  sys.puts('}');
+  sys.puts('');
+  sys.puts('"servers" - servers list');
+  sys.puts('"addr" - balancer address');
+  sys.puts('"spread" - balancer can spread request to random server');
+  sys.puts('           use this option to configure rules of spread');
+  sys.puts('           "include", "exclude" - should contain RegExp');
+}
+
+if (filename === '-h' || filename === '--help') {
+  help();
+  return;
+}
+    
+fs.readFile(filename, function(err, data) {
+  if (err) {
+    help();
+    return;
+  }
+  
+  var config;
+  try {
+    config = JSON.parse(data);
+  } catch (e) {
+    throw Error(filename + ' is not valid JSON file (' + e +')');
+  }
+  
+  Balancer(config);
+});
+
+process.on('uncaughtException', function(e) {
+  sys.puts('Balancer caught exception: ' + e);
+});
