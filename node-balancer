@@ -21,6 +21,7 @@ function help() {
   sys.puts('    "127.0.0.1:8081"');
   sys.puts('  ],');
   sys.puts('  "addr" : "127.0.0.1:80",');
+  sys.puts('  "hostname" : "www.google.com",');
   sys.puts('  "spread" : {,');
   sys.puts('    "include": ".*",');
   sys.puts('    "exclude": "\\\\.json$"');

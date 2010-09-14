@@ -11,7 +11,7 @@
         "localhost:8088",
         "localhost:8089"
     ],
-    "addr": "192.168.0.100:80",
+    "addr": "192.168.0.100:80",    "hostname": "www.google.com",
     "spread": {
       "include": ".*",
       "exclude": "new|update|talk"
