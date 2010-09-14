@@ -1,1 +1,0 @@
-var fs = require('fs'),    Balancer = require('./lib/balancer').Balancer,    filename = './config.json';    fs.readFile(filename, function(err, data) {  if (err) throw Error('Can\'t open ' + filename);    var config;  try {    config = JSON.parse(data);  } catch (e) {    throw Error(filename + ' is not valid JSON file (' + e +')');  }    Balancer(config);});

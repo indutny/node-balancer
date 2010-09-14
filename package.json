@@ -1,0 +1,22 @@
+{
+  "name"          : "Balancer",
+  "description"   : "Load Balancer for node.js (supports WebSockets)",
+  "url"           : "http://github.com/donnerjack13589/node-balancer",
+  "keywords"      : ["load balancer", "balancer", "websocket"],
+  "author"        : "Fedor Indutny <fedor.indutny@gmail.com>",
+  "contributors"  : [
+	{name: "Fedor Indutny", email: "fedor.indutny@gmail.com"}
+  ],
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/donnerjack13589/balancer.git"
+  },  
+  "version"       : "0.2.0",
+  "engines"       : { "node": ">=0.2" },
+  "directories": {
+    "lib": "./lib"
+  },
+  "bin": {
+    "node-balancer" : "./node-balancer"
+  }
+}
