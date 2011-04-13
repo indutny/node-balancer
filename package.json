@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git://github.com/donnerjack13589/node-balancer.git"
   },
-  "version"       : "0.2.2",
+  "version"       : "0.2.3",
   "engines"       : { "node": ">=0.2.0" },
   "main" : "./lib/balancer/index.js",
   "bin": {
